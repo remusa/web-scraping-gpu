@@ -1,0 +1,30 @@
+pre-commit:
+  parallel: true
+  commands:
+    # type-check:
+    #   glob: "*.{ts,tsx}"
+    #   run: npm run typecheck
+    # lint:
+    #   run: npm run lint
+    check-format:
+      run: npm run prettier
+
+commit-msg:
+  parallel: true
+  commands:
+    lint-commit-msg:
+      run: npm run commitlint
+
+pre-push:
+  parallel: true
+  commands:
+    # lslint:
+    #   run: npm run lslint
+    packages-audit:
+      tags: security
+      run: npm audit
+    # test:
+    #   run: npm run test:run
+    fix:
+      glob: '*.{js,ts,jsx,tsx,json,css,html,yml,md,mdx}'
+      run: npm run fix && git add {staged_files}

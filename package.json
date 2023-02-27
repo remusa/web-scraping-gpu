@@ -1,0 +1,39 @@
+{
+  "name": "web-scrapers",
+  "version": "1.0.0",
+  "description": "Web scraping exercises",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run start:cpu",
+    "start:gpu": "node src/gpu/index.js && npm run format",
+    "start:cpu": "node src/cpu/index.js && npm run format",
+    "prettier": "prettier . --check",
+    "format": "prettier . --loglevel=silent --write",
+    "fix": "npm run format",
+    "commitlint": "npx commitlint --edit --verbose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^7.6.2",
+    "dotenv": "^16.0.2",
+    "playwright": "^1.25.2",
+    "twilio": "^3.82.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
+    "@types/node": "18.7.16",
+    "lefthook": "1.1.1",
+    "prettier": "2.7.1"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=16"
+  },
+  "volta": {
+    "node": "18.9.0"
+  }
+}

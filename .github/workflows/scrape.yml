@@ -1,0 +1,46 @@
+name: Scrape latest data
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  schedule:
+    - cron: '5 * * * *'
+env:
+  URL: ${{ secrets.URL }}
+  TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+  TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+  TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
+  MY_PHONE_NUMBER: ${{ secrets.MY_PHONE_NUMBER }}
+  NOTIFY_THRESHOLD: ${{ secrets.NOTIFY_THRESHOLD }}
+  STOCK_ALERT: ${{ secrets.STOCK_ALERT }}
+jobs:
+  scheduled:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - name: Scrape latest data
+        run: |-
+          URL=${{ env.URL }}
+          TWILIO_ACCOUNT_SID=${{ env.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN=${{ env.TWILIO_AUTH_TOKEN }}
+          TWILIO_PHONE_NUMBER=${{ env.TWILIO_PHONE_NUMBER }}
+          MY_PHONE_NUMBER=${{ env.MY_PHONE_NUMBER }}
+          NOTIFY_THRESHOLD=${{ env.NOTIFY_THRESHOLD }}
+          STOCK_ALERT=${{ env.STOCK_ALERT }}
+          npm start
+          npm run format
+      - name: Commit and push if it changed
+        run: |-
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push

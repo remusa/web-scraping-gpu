@@ -17,7 +17,7 @@ const STOCK_ALERT = Number.parseInt(process.env.STOCK_ALERT)
 const client = twilio(accountSid, authToken)
 const fileReadme = 'README.md'
 
-const db = new Database('data.db', { verbose: console.log })
+const db = new Database('src/data.db', { verbose: console.log })
 
 const dateFormatter = new Intl.DateTimeFormat('es-MX', {
   dateStyle: 'short',
@@ -47,7 +47,7 @@ function initializeDb() {
 
 async function scrape() {
   const browser = await playwright['chromium'].launch({
-    // headless: false,
+    headless: false,
     // slowMo: 100, // Uncomment to visualize test
   })
   const page = await browser.newPage()
@@ -55,7 +55,7 @@ async function scrape() {
   await page.screenshot({ path: 'screenshot.png' })
 
   const now = dateFormatter.format(new Date())
-  const priceElement = (await page.locator('.soloeste ins').textContent()) || '0'
+  const priceElement = (await page.locator('.soloeste ins').nth(1).textContent()) || '0'
   const price = Number.parseFloat(priceElement?.trim()?.replace(/[$,]/gi, ''))
   const stockElement = await page.locator('span > .stock').textContent()
   const stock = Number.parseInt(stockElement?.trim()?.replace(' disponibles', '') ?? '0')

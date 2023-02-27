@@ -5,12 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run start:cpu",
-    "start:gpu": "node src/gpu/index.js && npm run format",
-    "start:cpu": "node src/cpu/index.js && npm run format",
+    "start": "node src/index.js && npm run format",
     "prettier": "prettier . --check",
     "format": "prettier . --loglevel=silent --write",
     "fix": "npm run format",
+    "deps": "npx taze -Iwi",
     "commitlint": "npx commitlint --edit --verbose"
   },
   "keywords": [],
@@ -18,22 +17,22 @@
   "license": "ISC",
   "dependencies": {
     "better-sqlite3": "^7.6.2",
-    "dotenv": "^16.0.2",
-    "playwright": "^1.25.2",
-    "twilio": "^3.82.0"
+    "dotenv": "^16.0.3",
+    "playwright": "^1.31.1",
+    "twilio": "^4.8.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.1.2",
-    "@commitlint/config-conventional": "17.1.0",
-    "@types/node": "18.7.16",
-    "lefthook": "1.1.1",
-    "prettier": "2.7.1"
+    "@commitlint/cli": "17.4.4",
+    "@commitlint/config-conventional": "17.4.4",
+    "@types/node": "18.14.2",
+    "lefthook": "1.3.2",
+    "prettier": "2.8.4"
   },
   "engineStrict": true,
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "volta": {
-    "node": "18.9.0"
+    "node": "18.14.2"
   }
 }

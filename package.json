@@ -26,7 +26,7 @@
     "@commitlint/config-conventional": "18.6.0",
     "@types/node": "20.11.16",
     "lefthook": "1.6.1",
-    "prettier": "3.2.4"
+    "prettier": "3.2.5"
   },
   "engineStrict": true,
   "engines": {

@@ -22,8 +22,8 @@
     "twilio": "^4.8.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "18.6.0",
-    "@commitlint/config-conventional": "18.6.0",
+    "@commitlint/cli": "18.6.1",
+    "@commitlint/config-conventional": "18.6.1",
     "@types/node": "20.11.17",
     "lefthook": "1.6.1",
     "prettier": "3.2.5"

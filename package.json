@@ -24,7 +24,7 @@
   "devDependencies": {
     "@commitlint/cli": "18.6.1",
     "@commitlint/config-conventional": "18.6.3",
-    "@types/node": "20.14.11",
+    "@types/node": "20.14.12",
     "lefthook": "1.7.5",
     "prettier": "3.3.3"
   },
